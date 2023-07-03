@@ -1,13 +1,44 @@
-## What is this?
+## RB101 notes
 
-These are my notes for the RB101 course. 
-It is structured like so: course.lesson.topic.notes
-Topics that were 'unnecessary' were ommitted.
+The act of note-taking forces a basic review. The end product
+acts as a index of all the relevant course material and serves
+as a base from which to study from.
 
-### lesson1: Preparations
-* being social has many benefits; get started early
-* ask questions after doing it yourself and document your work
-* commit your work often
+## Table of Contents
+
+1.  [Introduction](https://github.com/williamseipp/RB101#Introduction)
+2.  [Preparations](https://github.com/williamseipp/RB101#Preparations)
+3.  [Quiz1](https://github.com/williamseipp/RB101#Quiz1)
+4.  [Small Programs](https://github.com/williamseipp/RB101#Small Programs)
+5. [Walk-through: calculator](https://github.com/williamseipp/RB101#)
+6. [Pseudo-code](https://github.com/williamseipp/RB101#)
+7. [Flowchart](https://github.com/williamseipp/RB101#)
+8. [Ruby version manager](https://github.com/williamseipp/RB101#)
+9. [Rubocop](https://github.com/williamseipp/RB101#)
+10. [Walk-through: refactoring calculator](https://github.com/williamseipp/RB101#)
+11. [Debugging](https://github.com/williamseipp/RB101#)
+12. [Precedence](https://github.com/williamseipp/RB101#)
+13. [Assignment: calculator bonus features](https://github.com/williamseipp/RB101#)
+14. [Assignment: mortgage / car loan calculator](https://github.com/williamseipp/RB101#)
+15. [Coding tips](https://github.com/williamseipp/RB101#)
+16. [Variable scope](https://github.com/williamseipp/RB101#)
+17. [Pass by reference vs pass by value](https://github.com/williamseipp/RB101#)
+18. [Walk-through: rock paper scissors](https://github.com/williamseipp/RB101#)
+19. [Coding tips 2](https://github.com/williamseipp/RB101#)
+20. [Assignment: RPS bonus features](https://github.com/williamseipp/RB101#)
+21. [Summary](https://github.com/williamseipp/RB101#)
+22. [Quiz2](https://github.com/williamseipp/RB101#)
+23. [Practice problems](https://github.com/williamseipp/RB101#)
+
+## Introduction
+
+These are my notes for the RB101 course, broken down by lesson & topic.
+Some topics were ommitted.
+
+### Preparations
+
+Being social has many benefits, so get started early. Ask specific questions
+after trying it out yourself and documenting your work. Also, commit often.
 
 #### solving problems
 * read [small problems primer](https://launchschool.com/gists/2a3a3d72)
@@ -16,15 +47,13 @@ Topics that were 'unnecessary' were ommitted.
  * medium: for 119 interview assessment, read the docs often and do independent research
  * hard: to gain mastery compare your answers, revisit difficult questions, challenge yourself
 
-### lesson 1 quiz
+### Quiz1
 
-**incorrect answer**
+**lesson learned: test your hypothesis**
 
->> which method definitions meet these requirements:
->> * 1 string argument
->> * returns an array of integers
->> * value of each integer in the array = length of the word in the corresponding
->>  position in the sentence. 'sudo poweroff' => [4,8]
+I was told to select all methods that returned an array of integers
+with values that correspond to lengths of the words in the corresponding
+sentence. I didn't confirm the return value of the call to `each`.
 
 ```ruby
 def string_lengths(sentence)
@@ -37,42 +66,12 @@ def string_lengths(sentence)
 end
 ```
 
-It _"looked right"_ but didn't confirm what the method + block did;
-I could have done this by reading [docs](https://ruby-doc.org/3.2.2/Array.html#method-i-each)
-or using irb
-
->> **habit: test your hypothesis**
-
-### lesson2: small programs
+### Small Programs
 
 In this lesson, you write small programs that get harder. 
 Think about a program's logic and how to debug.
 
-### ruby style
-    
-constant variables do not change
-    FIVE = 5
-
-use {} for blocks if the expression fits on a single line
-
-```ruby
-    [1.2.3].each {|num| print "#{num} "
-
-    class MyFirstClass
-    end
-
-```
-
-**concept: "truthiness"**
-
-because all expressions evaluate to "truthy" except false and nil,
-the code below works:      
-
-```ruby
-    if name && name.valid?
-```
-
-### walk-through: calculator
+### Walk-through: calculator
 The command line calculator should do the following:
 
 * asks for two numbers
@@ -80,7 +79,7 @@ The command line calculator should do the following:
 * displays the result
 * uses Kernel.gets() and Kernel.puts()
 
-### pseudo-code and flowchart: focus on the logic first
+### Pseudo-code and flowchart
 pseudo-code and flowcharts allow you to focus on the logic of a problem
 
 
@@ -123,7 +122,7 @@ temperment: learn to deal with frustration, then systematically search
 reading error messages: embrace reading stack traces; you'll improve
 online resources: google, stack overflow, documentation
 
-### steps
+**steps**
  1. Reproduce the Error:
  2. Determine boundaries: try different inputs to find scope of the error
  3. Trace the code: look at execution backwards and "trap" the error
@@ -131,7 +130,7 @@ online resources: google, stack overflow, documentation
  5. Fix: one problem at a time
  6. Test: does this fix work for all inputs?
 
-### techniques
+**techniques**
  1. line by line: inspect code with an attention to detail
  2. rubber duck: talk it out to something and you'll uncover errors
  3. walking away: take a break and let the problem simmer in your brain
@@ -183,27 +182,15 @@ intermediate objects in method chains like so...
 similar to pry, it allows you to verify that the object you're
 referring to in a method chain is what you think it is
 
-### assignment: calculator bonus features
+### Assignment: calculator bonus features
+### Assignment: mortgage / car loan calculator
+### Coding tips
+### Variable scope
+### Pass by reference vs pass by value
+### Walk-through: rock paper scissors
+### Coding tips 2
+### Assignment: RPS bonus features
+### Summary
+### Quiz2
+### Practice problems
 
-### assignment: mortgage / car loan calculator
-
-### coding tips
-
-### variable scope
-
-### more variable scope
-
-### pass by reference vs pass by value
-
-### walk-through: rock paper scissors
-
-### coding tips 2
-
-### assignment: RPS bonus features
-
-### summary
-
-### quiz
-
-
-### lesson3: practice problems
