@@ -1,3 +1,6 @@
+require 'yaml'
+
+# methods
 def prompt(message)
   puts("\n#{message} \n")
 end
@@ -12,9 +15,16 @@ def positive_num?(loan)
   end
 end
 
-#     greet user and ask for name
-prompt('welcome to the mortgage calculator')
-prompt("what's your name? ")
+# constants and variables
+MESSAGES = YAML.load_file('loan_messages.yml')
+
+# MAIN LOOP
+# introduce program
+system "clear"
+prompt MESSAGES['introduce program']
+
+#     ask for name
+prompt MESSAGES['ask for name']
 
 # get name and validate name
 name = ''
@@ -28,11 +38,17 @@ loop do
   end
 end
 
-# introduce program and ask for loan amount
-prompt("Nice to meet you #{name}, I hear you're interested in calculating a
-monthly payment. First, I'll need some details. Could I have the loan amount?")
+# greet by name
+system "clear"
+prompt MESSAGES['introduce program']
+puts "\nHello #{name}"
+sleep(1)
+system "clear"
 
 # ask for loan amount
+system "clear"
+prompt MESSAGES['introduce program']
+
 # get loan amount
 # validate loan amount
 loan_amount = ''
@@ -47,6 +63,7 @@ loop do
 end
 
 # ask for loan duration
+prompt MESSAGES['ask for loan duration']
 # get loan duration
 # validate loan duration
 loan_duration_years = ''
@@ -61,6 +78,7 @@ loop do
 end
 
 # ask for apr
+prompt MESSAGES['ask for apr']
 # get apr
 # validate apr
 apr = ''
@@ -78,41 +96,14 @@ end
 monthly_interest_rate = apr.to_f / 12 / 100
 loan_duration_months = loan_duration_years.to_i * 12
 
-# confirm the terms of the loan with user before answering
+# clear user input
+system "clear"
+
+# display loan terms
 puts "Here are the terms of the loan:\n"
 puts "The loan amount is $#{loan_amount}"
 puts "Monthly interest rate is #{monthly_interest_rate}"
 puts "The loan duration is #{loan_duration_months} months"
-#
-# psuedocode
-#
-# 1. introduce the program
-# 1a. greet user
-# 1b. ask for name
-# 1c. tell user what the program does
-#
-# 2. have user fill out the loan terms sheet
-# 2a. ask user for loan amount and provide examples for input
-# 2b. validate loan amount
-# 2c. ask user for loan duration and provide examples for input
-# 2d. validate loan duration
-# 2e. ask user for apr and provide examples for input
-# 2f. validate apr
-#
-# 3. calculate the monthly payment
-# 3a. apply formula with loan terms given
-# 3b. save the monthly payment
-#
-# 4. display the monthly payment of the loan
-# 4a. show the loan terms in a clean way with the monthly payment
-#
-# 5. ask for further input
-# 5a. ask user if they want to calculate another loan
-# 5b. validate user answer
-# 5c. quit the program or repeat step 1
-#
-#
-# other requirements
 #
 # UI requirements
 # * validate input
