@@ -24,9 +24,10 @@ system "clear"
 prompt MESSAGES['introduce program']
 
 #     ask for name
+#     get name
+#     validate name
+#     greet by name
 prompt MESSAGES['ask for name']
-
-# get name and validate name
 name = ''
 loop do
   name = gets().chomp()
@@ -46,11 +47,11 @@ sleep(1)
 system "clear"
 
 # ask for loan amount
+# get loan amount
+# validate loan amount
 system "clear"
 prompt MESSAGES['introduce program']
 
-# get loan amount
-# validate loan amount
 loan_amount = ''
 loop do
   print("Loan amount (just numbers): ")
@@ -63,9 +64,9 @@ loop do
 end
 
 # ask for loan duration
-prompt MESSAGES['ask for loan duration']
 # get loan duration
 # validate loan duration
+prompt MESSAGES['ask for loan duration']
 loan_duration_years = ''
 loop do
   print("Loan duration (in years): ")
@@ -77,10 +78,11 @@ loop do
   end
 end
 
-# ask for apr
-prompt MESSAGES['ask for apr']
-# get apr
+# ASK FOR loan's apr
+# get loan's apr
 # validate apr
+# set loan's apr
+prompt MESSAGES['ask for apr']
 apr = ''
 loop do
   print("Annual Percentage Rate (just numbers):")
@@ -96,30 +98,11 @@ end
 monthly_interest_rate = apr.to_f / 12 / 100
 loan_duration_months = loan_duration_years.to_i * 12
 
-# clear user input
-system "clear"
+# calculate loan's monthly payment
 
 # display loan terms
+# display monthly payment
 puts "Here are the terms of the loan:\n"
 puts "The loan amount is $#{loan_amount}"
 puts "Monthly interest rate is #{monthly_interest_rate}"
 puts "The loan duration is #{loan_duration_months} months"
-#
-# UI requirements
-# * validate input
-#     round down numeric values
-#     loan_amount: only allow numeric values + $ + , . greater than 0
-#     apr: only allow numeric values + % + . 0 or greater
-#     loan length: only allow for numeric values and allow for years + months
-#
-# * clear screen when it makes sense
-#    before welcome message
-# * summarize loan terms
-# * exit from program gracefully
-#
-# source code guidelines
-# * main loop is declarative
-# * code should describe itself: at no point should a reviewer be asking
-#       "what does this do" or "what's happening here?". It should be obvious
-# * method names describe what is happening
-# * use constants to avoid "magic numbers"
