@@ -1,30 +1,3 @@
-# psuedocode
-#
-# 1. introduce the program
-# 1a. greet user
-# 1b. ask for name
-# 1c. tell user what the program does
-#
-# 2. have user fill out the loan terms sheet
-# 2a. ask user for loan amount and provide examples
-# 2b. validate loan amount
-# 2c. ask user for loan duration and provide examples
-# 2d. validate loan duration
-# 2e. ask user for apr and provide examples
-# 2f. validate apr
-#
-# 3. calculate the monthly payment
-# 3a. apply formula with loan terms given
-# 3b. save the monthly payment
-#
-# 4. display the monthly payment of the loan
-# 4a. show the loan terms in a clean way with the monthly payment
-#
-# 5. ask for further input
-# 5a. ask user if they want to calculate another loan
-# 5b. validate user answer
-# 5c. quit the program or repeat step 1
-#
 def prompt(message)
   puts("\n#{message} \n")
 end
@@ -43,6 +16,7 @@ end
 prompt('welcome to the mortgage calculator')
 prompt("what's your name? ")
 
+# get name and validate name
 name = ''
 loop do
   name = gets().chomp()
@@ -54,10 +28,13 @@ loop do
   end
 end
 
+# introduce program and ask for loan amount
 prompt("Nice to meet you #{name}, I hear you're interested in calculating a
 monthly payment. First, I'll need some details. Could I have the loan amount?")
 
-#     prompt user for loan_amount
+# ask for loan amount
+# get loan amount
+# validate loan amount
 loan_amount = ''
 loop do
   print("Loan amount (just numbers): ")
@@ -69,7 +46,9 @@ loop do
   end
 end
 
-#     prompt user for loan_duration_years
+# ask for loan duration
+# get loan duration
+# validate loan duration
 loan_duration_years = ''
 loop do
   print("Loan duration (in years): ")
@@ -81,7 +60,9 @@ loop do
   end
 end
 
-# prompt user for apr
+# ask for apr
+# get apr
+# validate apr
 apr = ''
 loop do
   print("Annual Percentage Rate (just numbers):")
@@ -103,9 +84,51 @@ puts "The loan amount is $#{loan_amount}"
 puts "Monthly interest rate is #{monthly_interest_rate}"
 puts "The loan duration is #{loan_duration_months} months"
 #
-#   >>  APPLY formula and solve for m
-#     apply formula with loan_amount, loan_duration_months
-#     and monthly_interest_rate and save the result as monthly_payment
+# psuedocode
 #
-#   >>  DISPLAY m to user
-#     display monthly_payment in the proper format
+# 1. introduce the program
+# 1a. greet user
+# 1b. ask for name
+# 1c. tell user what the program does
+#
+# 2. have user fill out the loan terms sheet
+# 2a. ask user for loan amount and provide examples for input
+# 2b. validate loan amount
+# 2c. ask user for loan duration and provide examples for input
+# 2d. validate loan duration
+# 2e. ask user for apr and provide examples for input
+# 2f. validate apr
+#
+# 3. calculate the monthly payment
+# 3a. apply formula with loan terms given
+# 3b. save the monthly payment
+#
+# 4. display the monthly payment of the loan
+# 4a. show the loan terms in a clean way with the monthly payment
+#
+# 5. ask for further input
+# 5a. ask user if they want to calculate another loan
+# 5b. validate user answer
+# 5c. quit the program or repeat step 1
+#
+#
+# other requirements
+#
+# UI requirements
+# * validate input
+#     round down numeric values
+#     loan_amount: only allow numeric values + $ + , . greater than 0
+#     apr: only allow numeric values + % + . 0 or greater
+#     loan length: only allow for numeric values and allow for years + months
+#
+# * clear screen when it makes sense
+#    before welcome message
+# * summarize loan terms
+# * exit from program gracefully
+#
+# source code guidelines
+# * main loop is declarative
+# * code should describe itself: at no point should a reviewer be asking
+#       "what does this do" or "what's happening here?". It should be obvious
+# * method names describe what is happening
+# * use constants to avoid "magic numbers"
