@@ -11,3 +11,8 @@ introduction: "
 ask for loan amount: "What is the loan amount?"
 ask for loan duration: "How long is the loan in years?"
 ask for loan apr: "What is the apr?"
+
+
+
+
+goodbye: "Thank you for choosing loan calculator. Goodbye."

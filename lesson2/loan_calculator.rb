@@ -83,3 +83,5 @@ loop do
 
   break if continue? == false
 end
+
+prompt MESSAGES['goodbye']
