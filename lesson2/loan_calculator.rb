@@ -39,6 +39,13 @@ def calculate_monthly_payment(loan_terms)
   loan_terms[:monthly_interest] * loan_terms[:amount]
 end
 
+def display_loan_terms(loan)
+  print "\nYou would like to borrow $#{loan[:amount]}"
+  puts " at a rate of #{loan[:monthly_interest]}%"
+  puts "over the course of #{loan[:duration_months]} months"
+  puts "your monthly payment is $#{loan[:monthly_payment]}"
+end
+
 def convert_to_months(years)
   years * MONTHS_IN_YEAR
 end
@@ -76,10 +83,9 @@ loop do
 
   loan[:monthly_payment] = calculate_monthly_payment(loan)
 
-  puts "here's the amount you want to borrow: #{loan[:amount]}"
-  puts "you'll be paying #{loan[:monthly_interest]} interest on it"
-  puts "over #{loan[:duration_months]} months"
-  puts "and paying #{loan[:monthly_payment]} every month"
+  system "clear"
+  prompt MESSAGES['introduction']
+  display_loan_terms(loan)
 
   break if continue? == false
 end
