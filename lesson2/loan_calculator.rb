@@ -2,7 +2,7 @@ require 'yaml'
 MESSAGES = YAML.load_file('loan_messages.yml')
 
 def prompt(message)
-  puts("\n#{message} \n")
+  print("\n#{message}")
 end
 
 def positive_num?(num)
@@ -16,22 +16,22 @@ def positive_num?(num)
 end
 
 def continue?
-  puts "do you want to continue? Enter y to continue"
+  prompt MESSAGES['ask for continue']
   gets.chomp == 'y'
 end
 
 def get_loan_amount
-  print("Loan amount (just numbers): ")
+  prompt MESSAGES['ask for loan amount']
   gets.chomp.to_f
 end
 
 def get_loan_duration
-  print("Loan duration (in years): ")
+  prompt MESSAGES['ask for loan duration']
   gets.chomp.to_f
 end
 
 def get_loan_apr
-  print("Annual Percentage Rate (just numbers):")
+  prompt MESSAGES['ask for loan apr']
   gets.chomp.to_f
 end
 
@@ -40,10 +40,10 @@ def calculate_monthly_payment(loan_terms)
 end
 
 def display_loan_terms(loan)
-  print "\nYou would like to borrow $#{loan[:amount]}"
+  print "\n  You would like to borrow $#{loan[:amount]}"
   puts " at a rate of #{loan[:monthly_interest]}%"
-  puts "over the course of #{loan[:duration_months]} months"
-  puts "your monthly payment is $#{loan[:monthly_payment]}"
+  puts "  over the course of #{loan[:duration_months]} months"
+  puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
 end
 
 def convert_to_months(years)
@@ -69,15 +69,12 @@ loop do
   system "clear"
   prompt MESSAGES['introduction']
 
-  prompt MESSAGES['ask for loan amount']
   loan[:amount] = get_loan_amount
   puts "lets validate the loan amount: #{loan[:amount]}"
 
-  prompt MESSAGES['ask for loan duration']
   loan[:duration_months] = convert_to_months(get_loan_duration)
   puts "lets validate the loan duration: #{loan[:duration_months]}"
 
-  prompt MESSAGES['ask for loan apr']
   loan[:monthly_interest] = get_loan_apr
   puts "lets validate the loan apr: #{loan[:monthly_interest]}"
 

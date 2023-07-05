@@ -8,11 +8,12 @@ introduction: "
   \n  * loan duration
   \n  * annual percentage rate (APR)
   \n____________________________________________________"
-ask for loan amount: "What is the loan amount?"
-ask for loan duration: "How long is the loan in years?"
-ask for loan apr: "What is the apr?"
-
-
-
+ask for loan amount: "What is the loan amount? ( 10000, $10,000.00, $10,000 )
+  \n  => "
+ask for loan duration: "How long do you want to take to pay this off? ( in years )
+  \n  => "
+ask for loan apr: "What is the annual percentage rate? ( 6.12, 6%, 0 )
+  \n  => "
+ask for continue: "  Do you want to continue? Enter y to continue => "
 
 goodbye: "Thank you for choosing loan calculator. Goodbye."
