@@ -36,12 +36,12 @@ def get_loan_apr
 end
 
 def calculate_monthly_payment(loan_terms)
-  loan_terms[:monthly_interest] * loan_terms[:amount]
+  loan_terms[:monthly_interest_rate] * loan_terms[:amount]
 end
 
 def display_loan_terms(loan)
   print "\n  You would like to borrow $#{loan[:amount]}"
-  puts " at a rate of #{loan[:monthly_interest]}%"
+  puts " at a monthly interest rate of #{loan[:monthly_interest_rate]}%"
   puts "  over the course of #{loan[:duration_months]} months"
   puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
 end
@@ -51,7 +51,7 @@ def convert_to_months(years)
 end
 
 def convert_to_monthly_interest_rate(apr)
-  apr / MONTHS_IN_YEAR / 100
+  convert_to_decimal(apr) / MONTHS_IN_YEAR
 end
 
 def convert_to_decimal(percentage)
@@ -61,7 +61,7 @@ end
 MONTHS_IN_YEAR = 12
 
 loan = { amount: 0,
-         monthly_interest: 0,
+         monthly_interest_rate: 0,
          duration_months: 0,
          monthly_payment: 0 }
 
@@ -75,8 +75,9 @@ loop do
   loan[:duration_months] = convert_to_months(get_loan_duration)
   puts "lets validate the loan duration: #{loan[:duration_months]}"
 
-  loan[:monthly_interest] = get_loan_apr
-  puts "lets validate the loan apr: #{loan[:monthly_interest]}"
+  loan[:monthly_interest_rate] = convert_to_monthly_interest_rate(get_loan_apr)
+  puts "lets validate the loan apr: #{loan[:monthly_interest_rate]}"
+  sleep(2)
 
   loan[:monthly_payment] = calculate_monthly_payment(loan)
 
