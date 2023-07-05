@@ -22,21 +22,21 @@ end
 
 def get_loan_amount
   print("Loan amount (just numbers): ")
-  gets.chomp
+  gets.chomp.to_f
 end
 
 def get_loan_duration
   print("Loan duration (in years): ")
-  gets.chomp
+  gets.chomp.to_f
 end
 
 def get_loan_apr
   print("Annual Percentage Rate (just numbers):")
-  gets.chomp
+  gets.chomp.to_f
 end
 
-def calculate_monthly_payment(_loan)
-  10.99
+def calculate_monthly_payment(loan_terms)
+  loan_terms[:monthly_interest] * loan_terms[:amount]
 end
 
 def convert_to_months(years)
@@ -53,28 +53,33 @@ end
 
 MONTHS_IN_YEAR = 12
 
+loan = { amount: 0,
+         monthly_interest: 0,
+         duration_months: 0,
+         monthly_payment: 0 }
+
 loop do
   system "clear"
   prompt MESSAGES['introduction']
 
   prompt MESSAGES['ask for loan amount']
-  loan_amount = get_loan_amount
-  puts "lets validate the loan amount: #{loan_amount}"
+  loan[:amount] = get_loan_amount
+  puts "lets validate the loan amount: #{loan[:amount]}"
 
   prompt MESSAGES['ask for loan duration']
-  loan_duration_years = get_loan_duration
-  puts "lets validate the loan duration: #{loan_duration_years}"
+  loan[:duration_months] = convert_to_months(get_loan_duration)
+  puts "lets validate the loan duration: #{loan[:duration_months]}"
 
   prompt MESSAGES['ask for loan apr']
-  loan_apr = get_loan_apr
-  puts "lets validate the loan apr: #{loan_apr}"
+  loan[:monthly_interest] = get_loan_apr
+  puts "lets validate the loan apr: #{loan[:monthly_interest]}"
 
-  monthly_payment = calculate_monthly_payment(30)
+  loan[:monthly_payment] = calculate_monthly_payment(loan)
 
-  puts "here's the amount you want to borrow: #{loan_amount}"
-  puts "you'll be paying #{loan_apr} interest on it"
-  puts "over #{loan_duration_years} years"
-  puts "and paying #{monthly_payment} every month"
+  puts "here's the amount you want to borrow: #{loan[:amount]}"
+  puts "you'll be paying #{loan[:monthly_interest]} interest on it"
+  puts "over #{loan[:duration_months]} months"
+  puts "and paying #{loan[:monthly_payment]} every month"
 
   break if continue? == false
 end
