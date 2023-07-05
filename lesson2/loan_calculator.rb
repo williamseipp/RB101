@@ -1,15 +1,15 @@
 require 'yaml'
+MESSAGES = YAML.load_file('loan_messages.yml')
 
-# methods
 def prompt(message)
   puts("\n#{message} \n")
 end
 
-def positive_num?(loan)
-  if loan.to_i.to_s
-    loan.to_i > 0
-  elsif loan.to_f.to_s
-    loan.to_f > 0
+def positive_num?(num)
+  if num.to_i.to_s
+    num.to_i > 0
+  elsif num.to_f.to_s
+    num.to_f > 0
   else
     false
   end
@@ -20,97 +20,61 @@ def continue?
   gets.chomp == 'y'
 end
 
-# constants and variables
-MESSAGES = YAML.load_file('loan_messages.yml')
+def get_loan_amount
+  print("Loan amount (just numbers): ")
+  gets.chomp
+end
 
-# MAIN LOOP
+def get_loan_duration
+  print("Loan duration (in years): ")
+  gets.chomp
+end
+
+def get_loan_apr
+  print("Annual Percentage Rate (just numbers):")
+  gets.chomp
+end
+
+def calculate_monthly_payment(_loan)
+  10.99
+end
+
+def convert_to_months(years)
+  years * MONTHS_IN_YEAR
+end
+
+def convert_to_monthly_interest_rate(apr)
+  apr / MONTHS_IN_YEAR / 100
+end
+
+def convert_to_decimal(percentage)
+  percentage * 0.01
+end
+
+MONTHS_IN_YEAR = 12
+
 loop do
-  # introduce program
   system "clear"
-  prompt MESSAGES['introduce program']
+  prompt MESSAGES['introduction']
 
-  #     ask for name( get name and validate)
-  #     greet by name
-  #     greet if its users first time using
-  prompt MESSAGES['ask for name']
-  name = ''
-  loop do
-    name = gets().chomp()
+  prompt MESSAGES['ask for loan amount']
+  loan_amount = get_loan_amount
+  puts "lets validate the loan amount: #{loan_amount}"
 
-    if name.empty?()
-      prompt("Make sure to use a valid name.")
-    else
-      break
-    end
-  end
-
-  # greet by name
-  system "clear"
-  prompt MESSAGES['introduce program']
-  puts "\nHello #{name}"
-  sleep(1)
-  system "clear"
-
-  # ask for loan amount ( get loan amount and validate loan amount)
-  # set loan amount
-  system "clear"
-  prompt MESSAGES['introduce program']
-
-  loan_amount = ''
-  loop do
-    print("Loan amount (just numbers): ")
-    loan_amount = gets.chomp
-    if positive_num?(loan_amount)
-      break
-    else
-      prompt("I'm sorry, thats not a valid amount. Please try again.")
-    end
-  end
-
-  # ask for loan duration ( get loan duration and validate loan duration)
-  # set loan duration
   prompt MESSAGES['ask for loan duration']
-  loan_duration_years = ''
-  loop do
-    print("Loan duration (in years): ")
-    loan_duration_years = gets.chomp
-    if positive_num?(loan_duration_years)
-      break
-    else
-      prompt("I'm sorry, thats not a valid amount. Please try again.")
-    end
-  end
+  loan_duration_years = get_loan_duration
+  puts "lets validate the loan duration: #{loan_duration_years}"
 
-  # ask for loan apr ( get loan apr and validate loan apr)
-  # set loan apr
-  prompt MESSAGES['ask for apr']
-  apr = ''
-  loop do
-    print("Annual Percentage Rate (just numbers):")
-    apr = gets.chomp
-    if positive_num?(apr)
-      break
-    else
-      prompt("I'm sorry, thats not a valid amount. Please try again.")
-    end
-  end
+  prompt MESSAGES['ask for loan apr']
+  loan_apr = get_loan_apr
+  puts "lets validate the loan apr: #{loan_apr}"
 
-  # convert user input into forms required by formula
-  monthly_interest_rate = apr.to_f / 12 / 100
-  loan_duration_months = loan_duration_years.to_i * 12
+  monthly_payment = calculate_monthly_payment(30)
 
-  # calculate loan's monthly payment
-  def calculate_monthly_payment(loan)
-    # loan[monthly_payment] = something
-  end
+  puts "here's the amount you want to borrow: #{loan_amount}"
+  puts "you'll be paying #{loan_apr} interest on it"
+  puts "over #{loan_duration_years} years"
+  puts "and paying #{monthly_payment} every month"
 
-  # display loan terms to user
-  # display monthly payment to user
-  puts "Here are the terms of the loan:\n"
-  puts "The loan amount is $#{loan_amount}"
-  puts "Monthly interest rate is #{monthly_interest_rate}"
-  puts "The loan duration is #{loan_duration_months} months"
-
-  # ask user if they want to repeat process
   break if continue? == false
 end

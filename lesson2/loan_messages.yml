@@ -1,8 +1,13 @@
-introduce program: "****************************************************
-  \n  Welcome to loan calculator. 
-  \n  Calculate the monthly payments on a typical loan. 
-  \n****************************************************"
-ask for name: "May I have your name?\n"
+introduction: "
+  \n
+  \n  Welcome to loan calculator!
+  \n____________________________________________________
+  \n  To calculate the monthly payments we need:
+  \n
+  \n  * loan amount to be borrowed
+  \n  * loan duration
+  \n  * annual percentage rate (APR)
+  \n____________________________________________________"
 ask for loan amount: "What is the loan amount?"
 ask for loan duration: "How long is the loan in years?"
-ask for apr: "What is the apr?"
+ask for loan apr: "What is the apr?"
