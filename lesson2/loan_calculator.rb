@@ -5,16 +5,6 @@ def prompt(message)
   print("\n#{message}")
 end
 
-def positive_num?(num)
-  if num.to_i.to_s
-    num.to_i > 0
-  elsif num.to_f.to_s
-    num.to_f > 0
-  else
-    false
-  end
-end
-
 def continue?
   prompt MESSAGES['ask for continue']
   gets.chomp == 'y'
@@ -44,6 +34,10 @@ def display_loan_terms(loan)
   puts " at a monthly interest rate of #{loan[:monthly_interest_rate]}%"
   puts "  over the course of #{loan[:duration_months]} months"
   puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
+end
+
+def float?(input)
+  !Float(input, exception: false).nil?
 end
 
 def convert_to_months(years)
