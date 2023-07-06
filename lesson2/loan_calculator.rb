@@ -7,12 +7,32 @@ end
 
 def continue?
   prompt MESSAGES['ask for continue']
-  gets.chomp == 'y'
+  gets.chomp.casecmp?('y')
 end
 
 def get_loan_amount
   prompt MESSAGES['ask for loan amount']
   gets.chomp.to_f
+end
+
+def valid_loan_amount?(amount)
+  number?(amount) && amount.to_f.positive?
+end
+
+def whole_number?(number)
+  !Integer(number, exception: false).nil?
+end
+
+def number?(number)
+  !Float(number, exception: false).nil?
+end
+
+def valid_loan_duration?(duration)
+  whole_number?(duration) && duration.to_i.positive?
+end
+
+def valid_apr?(apr)
+  number?(apr) && !apr.to_f.negative?
 end
 
 def get_loan_duration
@@ -34,10 +54,6 @@ def display_loan_terms(loan)
   puts " at a monthly interest rate of #{loan[:monthly_interest_rate]}%"
   puts "  over the course of #{loan[:duration_months]} months"
   puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
-end
-
-def float?(input)
-  !Float(input, exception: false).nil?
 end
 
 def convert_to_months(years)
