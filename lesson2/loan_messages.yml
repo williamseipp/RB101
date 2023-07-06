@@ -8,11 +8,12 @@ introduction: "
   \n  * loan duration
   \n  * annual percentage rate (APR)
   \n____________________________________________________"
-ask for loan amount: "What is the loan amount? ( 10000, $10,000.00, $10,000 )
+ask for loan amount: "What is the loan amount? ( 100000.00 , 100 )
   \n  => "
-ask for loan duration: "How long do you want to take to pay this off? ( in years )
+ask for loan duration: "What is the loan duration in years? ( 30, 12, 10)
+  \n  If you'd like to enter the duration in months, press enter
   \n  => "
-ask for loan apr: "What is the annual percentage rate? ( 6.12, 6%, 0 )
+ask for loan apr: "What is the annual percentage rate? ( 6.12, 6, 0 )
   \n  => "
 ask for continue: "  Do you want to continue? Enter y to continue => "
 
