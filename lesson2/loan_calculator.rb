@@ -11,42 +11,52 @@ def continue?
 end
 
 def get_loan_amount
-  prompt MESSAGES['ask for loan amount']
-  gets.chomp.to_f
-end
+  loop do
+    prompt MESSAGES['ask for loan amount']
+    amount = gets.chomp
 
-def valid_loan_amount?(amount)
-  number?(amount) && amount.to_f.positive?
-end
+    return amount.to_f if valid_amount?(amount)
 
-def whole_number?(number)
-  !Integer(number, exception: false).nil?
-end
-
-def number?(number)
-  !Float(number, exception: false).nil?
-end
-
-def valid_loan_duration?(duration)
-  whole_number?(duration) && duration.to_i.positive?
-end
-
-def valid_apr?(apr)
-  number?(apr) && !apr.to_f.negative?
-end
-
-def get_loan_duration
-  prompt MESSAGES['ask for loan duration']
-  gets.chomp.to_f
+    prompt MESSAGES['invalid']
+  end
 end
 
 def get_loan_apr
-  prompt MESSAGES['ask for loan apr']
-  gets.chomp.to_f
+  loop do
+    prompt MESSAGES['ask for loan apr']
+    apr = gets.chomp
+
+    return apr.to_f if valid_apr?(apr)
+
+    prompt MESSAGES['invalid']
+  end
+end
+
+def get_loan_duration
+  loop do
+    prompt MESSAGES['ask for loan duration']
+    duration = gets.chomp
+
+    return duration.to_f if valid_duration?(duration)
+
+    prompt MESSAGES['invalid']
+  end
+end
+
+def valid_amount?(string)
+  /^[1-9][0-9]*(?:.?[0-9]{2})$/.match(string)
+end
+
+def valid_apr?(string)
+  /^[0-9]{1,3}(?:.?[0-9]{1,2})$/.match(string)
+end
+
+def valid_duration?(string)
+  /^[1-9][0-9]*$/.match(string)
 end
 
 def calculate_monthly_payment(loan_terms)
-  loan_terms[:monthly_interest_rate] * loan_terms[:amount]
+  # loan_terms[:monthly_interest_rate] * loan_terms[:amount]
 end
 
 def display_loan_terms(loan)
