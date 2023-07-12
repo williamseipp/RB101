@@ -11,35 +11,29 @@ def continue?
 end
 
 def get_loan_amount
+  prompt MESSAGES['ask for loan amount']
   loop do
-    prompt MESSAGES['ask for loan amount']
     amount = gets.chomp
-
     return amount.to_f if valid_amount?(amount)
-
-    prompt MESSAGES['invalid']
+    prompt MESSAGES['invalid amount']
   end
 end
 
 def get_loan_apr
+  prompt MESSAGES['ask for loan apr']
   loop do
-    prompt MESSAGES['ask for loan apr']
     apr = gets.chomp
-
     return apr.to_f if valid_apr?(apr)
-
-    prompt MESSAGES['invalid']
+    prompt MESSAGES['invalid apr']
   end
 end
 
 def get_loan_duration
+  prompt MESSAGES['ask for loan duration']
   loop do
-    prompt MESSAGES['ask for loan duration']
     duration = gets.chomp
-
     return duration.to_f if valid_duration?(duration)
-
-    prompt MESSAGES['invalid']
+    prompt MESSAGES['invalid duration']
   end
 end
 
