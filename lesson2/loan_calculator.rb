@@ -1,4 +1,5 @@
 require 'yaml'
+require 'pry'
 MESSAGES = YAML.load_file('loan_messages.yml')
 
 def prompt(message)
@@ -14,7 +15,7 @@ def get_loan_amount
   prompt MESSAGES['ask for loan amount']
   loop do
     amount = gets.chomp
-    return amount.to_f if valid_amount?(amount)
+    return amount.to_f if valid_loan_amount?(amount)
     prompt MESSAGES['invalid amount']
   end
 end
@@ -29,24 +30,57 @@ def get_loan_apr
 end
 
 def get_loan_duration
-  prompt MESSAGES['ask for loan duration']
+  loan_duration = { years: 0, months: 0 }
+
   loop do
-    duration = gets.chomp
-    return duration.to_f if valid_duration?(duration)
-    prompt MESSAGES['invalid duration']
+    prompt MESSAGES['ask for loan duration years']
+    years = gets.chomp
+
+    prompt MESSAGES['ask for loan duration months']
+    months = gets.chomp
+
+    if valid_loan_duration?(years, months)
+      loan_duration[:years] = years.to_f
+      loan_duration[:months] = months.to_f
+      break
+    else
+      prompt MESSAGES['invalid duration']
+    end
   end
+  loan_duration
 end
 
-def valid_amount?(string)
-  /^[1-9][0-9]*(?:.?[0-9]{2})$/.match(string)
+def valid_loan_amount?(string)
+  positive_integer?(string) || positive_float_with_two_decimals?(string)
 end
 
 def valid_apr?(string)
-  /^[0-9]{1,3}(?:.?[0-9]{1,2})$/.match(string)
+  positive_integer?(string) ||
+    positive_float_with_one_decimal?(string) ||
+    positive_float_with_two_decimals?(string) ||
+    zero?(string)
 end
 
-def valid_duration?(string)
+def valid_loan_duration?(years_string, months_string)
+  positive_integer?(years_string) || (zero?(years_string) &&
+    positive_integer?(months_string)) || (zero?(months_string) &&
+    !((zero?(years_string) && zero?(months_string))))
+end
+
+def positive_integer?(string)
   /^[1-9][0-9]*$/.match(string)
+end
+
+def positive_float_with_two_decimals?(string)
+  /^[1-9][0-9]*\.[0-9]{2}$/.match(string)
+end
+
+def positive_float_with_one_decimal?(string)
+  /^[1-9][0-9]*\.[0-9]{1}$/.match(string)
+end
+
+def zero?(string)
+  string.to_i == 0
 end
 
 def calculate_monthly_payment(loan_terms)
@@ -60,8 +94,9 @@ def display_loan_terms(loan)
   puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
 end
 
-def convert_to_months(years)
-  years * MONTHS_IN_YEAR
+def convert_to_months(years_and_months = {})
+  (years_and_months.fetch(:years) * MONTHS_IN_YEAR) +
+    years_and_months.fetch(:months)
 end
 
 def convert_to_monthly_interest_rate(apr)
