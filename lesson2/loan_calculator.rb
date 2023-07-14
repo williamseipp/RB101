@@ -51,10 +51,14 @@ def get_loan_duration
 end
 
 def valid_loan_amount?(string)
+  # number?
+  # is number positive?
   positive_integer?(string) || positive_float_with_two_decimals?(string)
 end
 
 def valid_apr?(string)
+  # number?
+  # is number positive?
   positive_integer?(string) ||
     positive_float_with_one_decimal?(string) ||
     positive_float_with_two_decimals?(string) ||
@@ -62,6 +66,9 @@ def valid_apr?(string)
 end
 
 def valid_loan_duration?(years_string, months_string)
+  # are both inputs numbers?
+  # are either inputs negative numbers?
+  # are numbers both not zero?
   positive_integer?(years_string) || (zero?(years_string) &&
     positive_integer?(months_string)) || (zero?(months_string) &&
     !((zero?(years_string) && zero?(months_string))))
