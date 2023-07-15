@@ -85,7 +85,7 @@ end
 
 def display_loan_terms(loan)
   print "\n  For a $#{loan[:amount]} loan "
-  print "at a rate of #{loan[:monthly_interest_rate] * MONTHS_IN_YEAR}% "
+  print "with #{decimal_to_percentage(loan[:monthly_interest_rate] * MONTHS_IN_YEAR)}% APR "
   puts "over #{loan[:duration_months]} months,"
   puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
 end
@@ -106,12 +106,16 @@ def convert_to_months(years_and_months = {})
     years_and_months[:months]
 end
 
-def convert_to_monthly_interest_rate(apr)
-  convert_to_decimal(apr) / MONTHS_IN_YEAR
+def apr_to_monthly_interest_rate(apr)
+  percentage_to_decimal(apr) / MONTHS_IN_YEAR
 end
 
-def convert_to_decimal(percentage)
+def percentage_to_decimal(percentage)
   percentage * 0.01
+end
+
+def decimal_to_percentage(decimal)
+  decimal * 100
 end
 
 MONTHS_IN_YEAR = 12
@@ -133,7 +137,7 @@ loop do
   system "clear"
   prompt MESSAGES['introduction']
 
-  loan[:monthly_interest_rate] = convert_to_monthly_interest_rate(get_loan_apr)
+  loan[:monthly_interest_rate] = apr_to_monthly_interest_rate(get_loan_apr)
   system "clear"
   prompt MESSAGES['introduction']
   sleep(1)
