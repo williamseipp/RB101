@@ -1,5 +1,4 @@
 require 'yaml'
-require 'pry'
 MESSAGES = YAML.load_file('loan_messages.yml')
 
 def prompt(message)
@@ -55,21 +54,13 @@ def valid_loan_amount?(string)
     decimal_to_two_places?(string)
 end
 
-def decimal_to_two_places?(string)
-  if string.include?('.')
-    string.length == string.index('.') + 3
-  else
-    true
-  end
+def valid_loan_duration?(years_string, months_string)
+  (whole_number?(years_string) && whole_number?(months_string)) &&
+    !(zero?(years_string) && zero?(months_string))
 end
 
 def valid_apr?(string)
   number?(string) && string.to_f >= 0
-end
-
-def valid_loan_duration?(years_string, months_string)
-  (whole_number?(years_string) && whole_number?(months_string)) &&
-    !(zero?(years_string) && zero?(months_string))
 end
 
 def number?(string)
@@ -80,8 +71,23 @@ def whole_number?(string)
   number?(string) && !(string.include?('.'))
 end
 
+def decimal_to_two_places?(string)
+  if string.include?('.')
+    string.length == string.index('.') + 3
+  else
+    true
+  end
+end
+
 def zero?(string)
   string.to_i == 0
+end
+
+def display_loan_terms(loan)
+  print "\n  For a $#{loan[:amount]} loan "
+  print "at a rate of #{loan[:monthly_interest_rate] * MONTHS_IN_YEAR}% "
+  puts "over #{loan[:duration_months]} months,"
+  puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
 end
 
 def calculate_monthly_payment(loan = {})
@@ -93,13 +99,6 @@ def calculate_monthly_payment(loan = {})
                       (1 - ((1 + loan[:monthly_interest_rate])**(-loan[:duration_months]))))
   end
   monthly_payment.round(2)
-end
-
-def display_loan_terms(loan)
-  print "\n  For a $#{loan[:amount]} loan "
-  print "at a rate of #{loan[:monthly_interest_rate] * MONTHS_IN_YEAR}% "
-  puts "over #{loan[:duration_months]} months,"
-  puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
 end
 
 def convert_to_months(years_and_months = {})
