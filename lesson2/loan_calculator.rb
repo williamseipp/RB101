@@ -51,41 +51,28 @@ def get_loan_duration
 end
 
 def valid_loan_amount?(string)
-  # is input a number?                  --> -1, 0, 1, 2.1
-  # and non-negative?                   --> 0, 1, 2.1
-  # is number positive?                 --> 1, 2.1
-  positive_integer?(string) || positive_float_with_two_decimals?(string)
+  number?(string) && string.to_f > 0 && decimal_to_two_places?(string)
+end
+
+def decimal_to_two_places?(string)
+  /^\d*(?:.?)\d{2}$/.match(string)
 end
 
 def valid_apr?(string)
-  # is input a number?                  --> -1, 0, 1, 2.1
-  # is number positive?                 --> 1, 2.1
-  positive_integer?(string) ||
-    positive_float_with_one_decimal?(string) ||
-    positive_float_with_two_decimals?(string) ||
-    zero?(string)
+  number?(string) && string.to_f > 0
 end
 
 def valid_loan_duration?(years_string, months_string)
-  # are both inputs numbers?            --> -1, 0, 1, 2.1
-  # are both numbers integers?          --> -1, 0, 1
-  # are both integers not negative?     -->  0, 1
-  # are integers both not zero?         -->
-  positive_integer?(years_string) || (zero?(years_string) &&
-    positive_integer?(months_string)) || (zero?(months_string) &&
-    !((zero?(years_string) && zero?(months_string))))
+  (whole_number?(years_string) && whole_number?(months_string)) &&
+    !(zero?(years_string) && zero?(months_string))
 end
 
-def positive_integer?(string)
-  /^[1-9][0-9]*$/.match(string)
+def number?(string)
+  Float(string, exception: false) != nil
 end
 
-def positive_float_with_two_decimals?(string)
-  /^[1-9][0-9]*\.[0-9]{2}$/.match(string)
-end
-
-def positive_float_with_one_decimal?(string)
-  /^[1-9][0-9]*\.[0-9]{1}$/.match(string)
+def whole_number?(string)
+  number?(string) && !(string.include?('.'))
 end
 
 def zero?(string)
