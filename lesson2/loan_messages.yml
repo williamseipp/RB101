@@ -1,14 +1,14 @@
 introduction: "
   \n
   \n  Welcome to loan calculator!
-  \n____________________________________________________
+  \n  _________________________________________________
   \n  Calculate the monthly payments on a loan by 
   \n  providing the following:
   \n
   \n  * amount to be borrowed
   \n  * duration of the loan
   \n  * annual percentage rate (APR)
-  \n____________________________________________________
+  \n  _________________________________________________
   \n"
 
 ask for loan amount: "What is the loan amount? ( 100, 100.23 )
