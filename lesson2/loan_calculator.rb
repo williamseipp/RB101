@@ -59,7 +59,7 @@ def decimal_to_two_places?(string)
 end
 
 def valid_apr?(string)
-  number?(string) && string.to_f > 0
+  number?(string) && string.to_f >= 0
 end
 
 def valid_loan_duration?(years_string, months_string)
@@ -80,9 +80,13 @@ def zero?(string)
 end
 
 def calculate_monthly_payment(loan = {})
-  loan[:amount] *
-    (loan[:monthly_interest_rate] /
-    (1 - ((1 + loan[:monthly_interest_rate])**(-loan[:duration_months]))))
+  if loan[:monthly_interest_rate] == 0
+    loan[:amount] / loan[:duration_months]
+  else
+    loan[:amount] *
+      (loan[:monthly_interest_rate] /
+      (1 - ((1 + loan[:monthly_interest_rate])**(-loan[:duration_months]))))
+  end
 end
 
 def display_loan_terms(loan)
