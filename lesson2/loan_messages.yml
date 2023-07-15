@@ -2,27 +2,31 @@ introduction: "
   \n
   \n  Welcome to loan calculator!
   \n____________________________________________________
-  \n  To calculate the monthly payments we need:
+  \n  Calculate the monthly payments on a loan by 
+  \n  providing the following:
   \n
-  \n  * loan amount to be borrowed
-  \n  * loan duration
+  \n  * amount to be borrowed
+  \n  * duration of the loan
   \n  * annual percentage rate (APR)
-  \n____________________________________________________"
-ask for loan amount: "What is the loan amount? ( 100, 100.00 )
+  \n____________________________________________________
+  \n"
+
+ask for loan amount: "What is the loan amount? ( 100, 100.23 )
   \n  => $"
 ask for loan duration years: "What is the loan duration in years? ( 30, 20)
   \n  If you'd like to enter the duration in months only, enter 0
-  \n  => "
+  \n  => years: "
 ask for loan duration months: "What is the loan duration in months? ( 12, 24, 30)
-  \n  => "
+  \n  => months: "
 ask for loan apr: "What is the annual percentage rate? ( 6, 6.5, 0 )
   \n  => "
-ask for continue: "  Do you want to continue? Enter y to continue 
+ask for continue: "  Do you want to continue? Enter y to continue and
+  \n  anything else to quit
   \n  => "
 
-invalid amount: "Something doesn't look right. Enter in the format: 100 or 100.00
+invalid amount: "Something doesn't look right. Enter a dollar amount ( 100, 100.23 )
   \n  => $"
-invalid duration: "Something doesn't look right. Enter in the format: 15 or 30, 
+invalid duration: "Invalid loan duration. Please try again.
   \n  => "
 invalid apr: "Something doesn't look right. Enter in the format: 5, 5.1, or 5.15
   \n  => "
