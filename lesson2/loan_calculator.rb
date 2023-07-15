@@ -40,8 +40,8 @@ def get_loan_duration
     months = gets.chomp
 
     if valid_loan_duration?(years, months)
-      loan_duration[:years] = years.to_f
-      loan_duration[:months] = months.to_f
+      loan_duration[:years] = years.to_i
+      loan_duration[:months] = months.to_i
       break
     else
       prompt MESSAGES['invalid duration']
@@ -81,18 +81,19 @@ end
 
 def calculate_monthly_payment(loan = {})
   if loan[:monthly_interest_rate] == 0
-    loan[:amount] / loan[:duration_months]
+    monthly_payment = loan[:amount] / loan[:duration_months]
   else
-    loan[:amount] *
-      (loan[:monthly_interest_rate] /
-      (1 - ((1 + loan[:monthly_interest_rate])**(-loan[:duration_months]))))
+    monthly_payment = loan[:amount] *
+                      (loan[:monthly_interest_rate] /
+                      (1 - ((1 + loan[:monthly_interest_rate])**(-loan[:duration_months]))))
   end
+  monthly_payment.round(2)
 end
 
 def display_loan_terms(loan)
-  print "\n  You would like to borrow $#{loan[:amount]}"
-  puts " at a monthly interest rate of #{loan[:monthly_interest_rate]}%"
-  puts "  over the course of #{loan[:duration_months]} months"
+  print "\n  For a $#{loan[:amount]} loan "
+  print "at a rate of #{loan[:monthly_interest_rate] * MONTHS_IN_YEAR}% "
+  puts "over #{loan[:duration_months]} months,"
   puts "  your monthly payment is $#{loan[:monthly_payment]}\n"
 end
 
@@ -121,19 +122,20 @@ loop do
   prompt MESSAGES['introduction']
 
   loan[:amount] = get_loan_amount
-  puts "lets validate the loan amount: #{loan[:amount]}"
+  system "clear"
+  prompt MESSAGES['introduction']
 
   loan[:duration_months] = convert_to_months(get_loan_duration)
-  puts "lets validate the loan duration: #{loan[:duration_months]}"
+  system "clear"
+  prompt MESSAGES['introduction']
 
   loan[:monthly_interest_rate] = convert_to_monthly_interest_rate(get_loan_apr)
-  puts "lets validate the loan apr: #{loan[:monthly_interest_rate]}"
-  sleep(2)
+  system "clear"
+  prompt MESSAGES['introduction']
+  sleep(1)
 
   loan[:monthly_payment] = calculate_monthly_payment(loan)
 
-  system "clear"
-  prompt MESSAGES['introduction']
   display_loan_terms(loan)
 
   break if continue? == false
