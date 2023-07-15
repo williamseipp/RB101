@@ -51,11 +51,16 @@ def get_loan_duration
 end
 
 def valid_loan_amount?(string)
-  number?(string) && string.to_f > 0 && decimal_to_two_places?(string)
+  number?(string) && string.to_f > 0 &&
+    decimal_to_two_places?(string)
 end
 
 def decimal_to_two_places?(string)
-  /^\d*(?:.?)\d{2}$/.match(string)
+  if string.include?('.')
+    string.length == string.index('.') + 3
+  else
+    true
+  end
 end
 
 def valid_apr?(string)
