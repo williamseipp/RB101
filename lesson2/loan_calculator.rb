@@ -102,8 +102,8 @@ def calculate_monthly_payment(loan = {})
 end
 
 def convert_to_months(years_and_months = {})
-  (years_and_months.fetch(:years) * MONTHS_IN_YEAR) +
-    years_and_months.fetch(:months)
+  (years_and_months[:years] * MONTHS_IN_YEAR) +
+    years_and_months[:months]
 end
 
 def convert_to_monthly_interest_rate(apr)
