@@ -79,8 +79,10 @@ def zero?(string)
   string.to_i == 0
 end
 
-def calculate_monthly_payment(loan_terms)
-  # loan_terms[:monthly_interest_rate] * loan_terms[:amount]
+def calculate_monthly_payment(loan = {})
+  loan[:amount] *
+    (loan[:monthly_interest_rate] /
+    (1 - ((1 + loan[:monthly_interest_rate])**(-loan[:duration_months]))))
 end
 
 def display_loan_terms(loan)
