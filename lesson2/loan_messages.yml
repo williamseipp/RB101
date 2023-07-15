@@ -20,7 +20,7 @@ ask for loan duration months: "What is the loan duration in months? ( 12, 24, 30
   \n  => months: "
 ask for loan apr: "What is the annual percentage rate? ( 6, 6.5, 0 )
   \n  => "
-ask for continue: "  Do you want to continue? Enter y to continue and
+ask for continue: "  Would you like to enter another loan? Enter 'y' for yes and
   \n  anything else to quit
   \n  => "
 
