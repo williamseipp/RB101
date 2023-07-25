@@ -12,23 +12,43 @@ def outcome(player, computer, combinations)
   combinations[player][computer]
 end
 
-VALID_CHOICES = ['rock', 'paper', 'scissors']
+VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
 
 combinations = {}
 combinations["rock"] = {
   "rock" => "It's a tie",
   "paper" => "Computer won!",
-  "scissors" => "You won!"
+  "scissors" => "You won!",
+  "spock" => "Computer won!",
+  "lizard" => "You won!"
 }
 combinations["paper"] = {
   "rock" => "You won!",
   "paper" => "It's a tie",
-  "scissors" => "Computer won!"
+  "scissors" => "Computer won!",
+  "spock" => "You won!",
+  "lizard" => "Computer won!"
 }
 combinations["scissors"] = {
   "rock" => "Computer won!",
   "paper" => "You won!",
-  "scissors" => "It's a tie"
+  "scissors" => "It's a tie",
+  "spock" => "Computer won!",
+  "lizard" => "You won!"
+}
+combinations["spock"] = {
+  "rock" => "You won!",
+  "paper" => "Computer won!",
+  "scissors" => "You won!",
+  "spock" => "It's a tie",
+  "lizard" => "Computer won!"
+}
+combinations["lizard"] = {
+  "rock" => "Computer won!",
+  "paper" => "You won!",
+  "scissors" => "Computer won!",
+  "spock" => "You won!",
+  "lizard" => "It's a tie"
 }
 
 loop do
