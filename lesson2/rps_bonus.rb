@@ -8,8 +8,9 @@ def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
-def outcome(player, computer, combinations)
-  combinations[player][computer]
+def display_results(player, computer, combinations)
+  result = combinations[player][computer]
+  prompt(result)
 end
 
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
@@ -67,8 +68,7 @@ loop do
   computer_choice = VALID_CHOICES.sample
 
   prompt("You chose #{choice}; Computer chose #{computer_choice}")
-  outcome = outcome(choice, computer_choice, combinations)
-  prompt(outcome)
+  display_results(choice, computer_choice, combinations)
 
   prompt("Do you want to play again?")
   answer = Kernel.gets().chomp()
