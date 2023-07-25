@@ -1,4 +1,3 @@
-# simplify display_results by replacing logic with hash
 # rock beats scissors and lizard
 # paper beats rock and spock
 # scissors beats paper and lizard
@@ -11,17 +10,24 @@ def prompt(message)
 end
 
 def display_results(player, computer)
-  if (player == 'rock' && computer == 'scissors') ||
-     (player == 'paper' && computer == 'rock') ||
-     (player == 'scissors' && computer == 'paper')
-    prompt("You won!")
-  elsif (player == 'rock' && computer == 'paper') ||
-        (player == 'paper' && computer == 'scissors') ||
-        (player == 'scissors' && computer == 'rock')
-    prompt("Computer won!")
-  else
-    prompt("It's a tie!")
-  end
+  combinations = {}
+  combinations["rock"] = {
+    "rock" => "It's a tie",
+    "paper" => "Computer won!",
+    "scissors" => "You won!"
+  }
+  combinations["paper"] = {
+    "rock" => "You won!",
+    "paper" => "It's a tie",
+    "scissors" => "Computer won!"
+  }
+  combinations["scissors"] = {
+    "rock" => "Computer won!",
+    "paper" => "You won!",
+    "scissors" => "It's a tie"
+  }
+  result = combinations[player][computer]
+  prompt(result)
 end
 
 loop do
