@@ -55,10 +55,16 @@ combinations["lizard"] = {
 loop do
   choice = ''
   loop do
-    prompt("Choose one: #{VALID_CHOICES.join(', ')}")
+    prompt("Choose one: #{VALID_CHOICES.join(', ')}
+      \n Abbreviations are welcome ( e.g. [r]ock or [sp]ock ) ")
     choice = Kernel.gets().chomp()
+    # compare choice to valid choices
+    player_decision = VALID_CHOICES.select do |element|
+      element.include?(choice)
+    end
 
-    if VALID_CHOICES.include?(choice)
+    if player_decision.length == 1
+      choice = player_decision[0]
       break
     else
       prompt("That's not a valid choice.")
