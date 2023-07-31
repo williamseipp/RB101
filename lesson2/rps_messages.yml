@@ -13,8 +13,14 @@ rules:
   6: scissors decapitates lizard
   7: lizard eats paper
   8: paper disproves Spock
-  9: Spock vaporizes rock"
+  9: Spock vaporizes rock
   10: and as it always has, rock crushes scissors
+  11: first to three wins is the grand winner!
 
-ask for loan amount: "What is the loan amount? ( 100, 100.23 )
-  \n  => $"
+directions: "Choose one: rock, paper, scissors, lizard, or spock
+  \n Abbreviations are welcome ( e.g. [r]ock or [sp]ock ) "
+
+results:
+  player: "[ YOU WIN! ]"
+  computer: "[... YOU LOST ]"
+  tie: "[ TIE ]"

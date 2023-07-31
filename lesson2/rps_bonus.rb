@@ -4,14 +4,20 @@ MESSAGES = YAML.load_file('rps_messages.yml')
 
 def explain_rules
   rule_line = 1
+
   loop do
-    system "clear"
-    prompt MESSAGES['introduction']
+    display_header()
     prompt MESSAGES['rules'][rule_line]
     sleep(1)
-    break if rule_line == 10
+    break if rule_line == 11
     rule_line += 1
   end
+
+  sleep(1)
+  display_header()
+end
+
+def display_header
   system "clear"
   prompt MESSAGES['introduction']
 end
@@ -24,8 +30,18 @@ def determine_winner(player, computer, combinations)
   combinations[player][computer]
 end
 
-def display_results(winner)
-  prompt(winner)
+def grand_winner?(score)
+  score['player'] == 3 || score['computer'] == 3
+end
+
+def declare_grand_winner(winner)
+  sleep(2)
+  puts "#{winner} has won 3 games! #{winner} is the grand winner!"
+end
+
+def display_results(choice, computer_choice, winner)
+  print("You chose #{choice}; Computer chose #{computer_choice}: ")
+  prompt MESSAGES['results'][winner]
 end
 
 def update_score(winner, score)
@@ -34,6 +50,10 @@ def update_score(winner, score)
   elsif winner == 'computer'
     score['computer'] += 1
   end
+end
+
+def display_score(score)
+  puts "player - #{score['player']}  computer - #{score['computer']}"
 end
 
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
@@ -78,23 +98,19 @@ combinations["lizard"] = {
 
 score = { 'player' => 0, 'computer' => 0 }
 
-loop do
-  system "clear"
-  choice = ''
+display_header()
+prompt("Do you want to hear the rules? [y]es ")
+answer = gets.chomp
+# explain rules
+explain_rules() if answer.downcase().start_with?('y')
 
+loop do
+  choice = ''
   loop do
     # intro to program
-    prompt MESSAGES['introduction']
-    prompt("Do you want to hear the rules? [y]es ")
-    answer = gets.chomp
-
-    # explain rules
-    explain_rules()
-    # explain_rules() if answer == answer.downcase().start_with?('y')
-
+    display_header()
     # player chooses
-    prompt("Choose one: #{VALID_CHOICES.join(', ')}
-      \n Abbreviations are welcome ( e.g. [r]ock or [sp]ock ) ")
+    prompt MESSAGES['directions']
     choice = Kernel.gets().chomp()
     VALID_CHOICES.select
     player_decision = VALID_CHOICES.select do |element|
@@ -109,32 +125,16 @@ loop do
     end
   end
 
-  # computer chooses
   computer_choice = VALID_CHOICES.sample
-
-  # review choices of each player
-  prompt("You chose #{choice}; Computer chose #{computer_choice}")
-
-  # winner is determined
   winner = determine_winner(choice, computer_choice, combinations)
-
-  # results are displayed
-  display_results(winner)
-
-  # score is updated
+  display_results(choice, computer_choice, winner)
   update_score(winner, score)
+  display_score(score)
 
-  # score is displayed
-  puts "The score is player: #{score['player']} to computer: #{score['computer']}"
-
-  # if someone has reached 3 points, game is over
-  if score['player'] == 3 || score['computer'] == 3
-    puts "#{winner} has won 3 games! #{winner} is the grand winner!"
-    sleep(2)
+  if grand_winner?(score)
+    declare_grand_winner(winner)
     break
   else
-    # otherwise, ask to continue playing
-    puts "lets play to 3!"
     prompt("Do you want to play again?")
     answer = Kernel.gets().chomp()
     break unless answer.downcase().start_with?('y')
