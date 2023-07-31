@@ -76,12 +76,13 @@ loop do
   choice = ''
 
   loop do
+    # prompt for choice
     prompt("Choose one: #{VALID_CHOICES.join(', ')}
       \n Abbreviations are welcome ( e.g. [r]ock or [sp]ock ) ")
     choice = Kernel.gets().chomp()
-    # compare choice to valid choices
+    VALID_CHOICES.select
     player_decision = VALID_CHOICES.select do |element|
-      element.include?(choice)
+      element.start_with?(choice)
     end
 
     if player_decision.length == 1
@@ -94,7 +95,8 @@ loop do
 
   computer_choice = VALID_CHOICES.sample
 
-  # review
+  # review choices of each player
+  #
   prompt("You chose #{choice}; Computer chose #{computer_choice}")
   # winner is determined
   winner = determine_winner(choice, computer_choice, combinations)
