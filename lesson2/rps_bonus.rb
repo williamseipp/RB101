@@ -1,59 +1,79 @@
-# rock beats scissors and lizard
-# paper beats rock and spock
-# scissors beats paper and lizard
-# lizard beats paper and spock
-# spock beats rock and scissors
+# Q: how to keep score?
+#   a: play a round
+#   b: determine winner
+#   c: record who wins in a tally
+#
+# Q: what part of my code "plays a round" and how does it work?
+# A: the main loop of the program;
+#    1. i am prompted to enter a choice and do so
+#    2. computer's choice is picked at random
+#    3. choices and all possible combinations of choices are input
+#       to a display_results which displays them
+#
+# I need to define a 'score' that increments appropriately when
+# a winner is chosen
+#
+#
+#
 
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
-def display_results(player, computer, combinations)
-  result = combinations[player][computer]
-  prompt(result)
+def determine_winner(player, computer, combinations)
+  combinations[player][computer]
 end
+
+def display_results(winner)
+  prompt(winner)
+end
+
+def keep_score; end
 
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
 
+# combinations has the winner of rochambeau for every combination possible
 combinations = {}
 combinations["rock"] = {
-  "rock" => "It's a tie",
-  "paper" => "Computer won!",
-  "scissors" => "You won!",
-  "spock" => "Computer won!",
-  "lizard" => "You won!"
+  "rock" => "tie",
+  "paper" => "computer",
+  "scissors" => "player",
+  "spock" => "computer",
+  "lizard" => "player"
 }
 combinations["paper"] = {
-  "rock" => "You won!",
-  "paper" => "It's a tie",
-  "scissors" => "Computer won!",
-  "spock" => "You won!",
-  "lizard" => "Computer won!"
+  "rock" => "player",
+  "paper" => "tie",
+  "scissors" => "computer",
+  "spock" => "player",
+  "lizard" => "computer"
 }
 combinations["scissors"] = {
-  "rock" => "Computer won!",
-  "paper" => "You won!",
-  "scissors" => "It's a tie",
-  "spock" => "Computer won!",
-  "lizard" => "You won!"
+  "rock" => "computer",
+  "paper" => "player",
+  "scissors" => "tie",
+  "spock" => "computer",
+  "lizard" => "player"
 }
 combinations["spock"] = {
-  "rock" => "You won!",
-  "paper" => "Computer won!",
-  "scissors" => "You won!",
-  "spock" => "It's a tie",
-  "lizard" => "Computer won!"
+  "rock" => "player",
+  "paper" => "computer",
+  "scissors" => "player",
+  "spock" => "tie",
+  "lizard" => "computer"
 }
 combinations["lizard"] = {
-  "rock" => "Computer won!",
-  "paper" => "You won!",
-  "scissors" => "Computer won!",
-  "spock" => "You won!",
-  "lizard" => "It's a tie"
+  "rock" => "computer",
+  "paper" => "player",
+  "scissors" => "computer",
+  "spock" => "player",
+  "lizard" => "tie"
 }
 
+score = { 'player' => 0, 'computer' => 0 }
 loop do
   choice = ''
+
   loop do
     prompt("Choose one: #{VALID_CHOICES.join(', ')}
       \n Abbreviations are welcome ( e.g. [r]ock or [sp]ock ) ")
@@ -74,7 +94,8 @@ loop do
   computer_choice = VALID_CHOICES.sample
 
   prompt("You chose #{choice}; Computer chose #{computer_choice}")
-  display_results(choice, computer_choice, combinations)
+  winner = determine_winner(choice, computer_choice, combinations)
+  display_results(winner)
 
   prompt("Do you want to play again?")
   answer = Kernel.gets().chomp()
