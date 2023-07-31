@@ -29,6 +29,14 @@ def display_results(winner)
   prompt(winner)
 end
 
+def update_score(winner, score)
+  if winner == 'player'
+    score['player'] += 1
+  elsif winner == 'computer'
+    score['computer'] += 1
+  end
+end
+
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
 
 # combinations has the winner of rochambeau for every combination possible
@@ -71,12 +79,13 @@ combinations["lizard"] = {
 
 player_score = 0
 computer_score = 0
+score = { 'player' => 0, 'computer' => 0 }
 
 loop do
   choice = ''
 
   loop do
-    # prompt for choice
+    # player chooses
     prompt("Choose one: #{VALID_CHOICES.join(', ')}
       \n Abbreviations are welcome ( e.g. [r]ock or [sp]ock ) ")
     choice = Kernel.gets().chomp()
@@ -93,27 +102,26 @@ loop do
     end
   end
 
+  # computer chooses
   computer_choice = VALID_CHOICES.sample
 
   # review choices of each player
-  #
   prompt("You chose #{choice}; Computer chose #{computer_choice}")
+
   # winner is determined
   winner = determine_winner(choice, computer_choice, combinations)
+
   # results are displayed
   display_results(winner)
+
   # score is updated
-  if winner == 'computer'
-    computer_score += 1
-  elsif winner == 'player'
-    player_score += 1
-  end
+  update_score(winner, score)
 
   # score is displayed
-  puts "The score is player: #{player_score} to computer: #{computer_score}"
+  puts "The score is player: #{score['player']} to computer: #{score['computer']}"
 
   # if someone has reached 3 points, game is over
-  if player_score == 3 || computer_score == 3
+  if score['player'] == 3 || score['computer'] == 3
     puts "#{winner} has won 3 games! #{winner} is the grand winner!"
     sleep(2)
     break
