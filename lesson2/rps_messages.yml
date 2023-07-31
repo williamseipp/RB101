@@ -1,0 +1,20 @@
+introduction: "
+  \n
+  \n  Welcome to rock paper scissors lizard spock!
+  \n  _________________________________________________
+  \n"
+
+rules:
+  1: scissors cuts paper
+  2: paper covers rock
+  3: rock crushes lizard
+  4: lizard poisons Spock
+  5: Spock smashes scissors
+  6: scissors decapitates lizard
+  7: lizard eats paper
+  8: paper disproves Spock
+  9: Spock vaporizes rock"
+  10: and as it always has, rock crushes scissors
+
+ask for loan amount: "What is the loan amount? ( 100, 100.23 )
+  \n  => $"

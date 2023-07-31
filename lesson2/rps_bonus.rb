@@ -1,24 +1,23 @@
+require 'yaml'
 require 'pry'
-# Q: how to keep score?
-#   a: play a round
-#   b: determine winner
-#   c: record who wins in a tally
-#
-# Q: what part of my code "plays a round" and how does it work?
-# A: the main loop of the program;
-#    1. i am prompted to enter a choice and do so
-#    2. computer's choice is picked at random
-#    3. choices and all possible combinations of choices are input
-#       to a display_results which displays them
-#
-# I need to define a 'score' that increments appropriately when
-# a winner is chosen
-#
-#
-#
+MESSAGES = YAML.load_file('rps_messages.yml')
+
+def explain_rules
+  rule_line = 1
+  loop do
+    system "clear"
+    prompt MESSAGES['introduction']
+    prompt MESSAGES['rules'][rule_line]
+    sleep(1)
+    break if rule_line == 10
+    rule_line += 1
+  end
+  system "clear"
+  prompt MESSAGES['introduction']
+end
 
 def prompt(message)
-  Kernel.puts("=> #{message}")
+  puts message
 end
 
 def determine_winner(player, computer, combinations)
@@ -77,14 +76,22 @@ combinations["lizard"] = {
   "lizard" => "tie"
 }
 
-player_score = 0
-computer_score = 0
 score = { 'player' => 0, 'computer' => 0 }
 
 loop do
+  system "clear"
   choice = ''
 
   loop do
+    # intro to program
+    prompt MESSAGES['introduction']
+    prompt("Do you want to hear the rules? [y]es ")
+    answer = gets.chomp
+
+    # explain rules
+    explain_rules()
+    # explain_rules() if answer == answer.downcase().start_with?('y')
+
     # player chooses
     prompt("Choose one: #{VALID_CHOICES.join(', ')}
       \n Abbreviations are welcome ( e.g. [r]ock or [sp]ock ) ")
