@@ -1,3 +1,4 @@
+require 'pry'
 # Q: how to keep score?
 #   a: play a round
 #   b: determine winner
@@ -27,8 +28,6 @@ end
 def display_results(winner)
   prompt(winner)
 end
-
-def keep_score; end
 
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
 
@@ -70,7 +69,9 @@ combinations["lizard"] = {
   "lizard" => "tie"
 }
 
-score = { 'player' => 0, 'computer' => 0 }
+player_score = 0
+computer_score = 0
+
 loop do
   choice = ''
 
@@ -93,13 +94,34 @@ loop do
 
   computer_choice = VALID_CHOICES.sample
 
+  # review
   prompt("You chose #{choice}; Computer chose #{computer_choice}")
+  # winner is determined
   winner = determine_winner(choice, computer_choice, combinations)
+  # results are displayed
   display_results(winner)
+  # score is updated
+  if winner == 'computer'
+    computer_score += 1
+  elsif winner == 'player'
+    player_score += 1
+  end
 
-  prompt("Do you want to play again?")
-  answer = Kernel.gets().chomp()
-  break unless answer.downcase().start_with?('y')
+  # score is displayed
+  puts "The score is player: #{player_score} to computer: #{computer_score}"
+
+  # if someone has reached 3 points, game is over
+  if player_score == 3 || computer_score == 3
+    puts "#{winner} has won 3 games! #{winner} is the grand winner!"
+    sleep(2)
+    break
+  else
+    # otherwise, ask to continue playing
+    puts "lets play to 3!"
+    prompt("Do you want to play again?")
+    answer = Kernel.gets().chomp()
+    break unless answer.downcase().start_with?('y')
+  end
 end
 
 prompt("Thank you for playing. Good bye!")
