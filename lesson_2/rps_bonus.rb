@@ -136,11 +136,10 @@ loop do
   display_results(choice, computer_choice, winner)
   update_score(winner, score)
   display_score(score)
+  sleep(2)
 
   if grand_winner?(score)
     declare_grand_winner(winner)
-    break
-  else
     prompt("Do you want to play again?")
     answer = gets.chomp
     break unless answer.downcase().start_with?('y')
