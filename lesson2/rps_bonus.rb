@@ -3,18 +3,11 @@ require 'pry'
 MESSAGES = YAML.load_file('rps_messages.yml')
 
 def explain_rules
-  rule_line = 1
-
-  loop do
-    display_header()
-    prompt MESSAGES['rules'][rule_line]
-    sleep(1)
-    break if rule_line == 11
-    rule_line += 1
-  end
-
-  sleep(1)
   display_header()
+  MESSAGES['rules'].each_value do |line|
+    puts line
+    sleep(1)
+  end
 end
 
 def display_header
@@ -26,6 +19,38 @@ def prompt(message)
   puts message
 end
 
+def get_player_input
+  prompt MESSAGES['directions']
+  gets.chomp
+end
+
+def get_player_choice
+  choice = ''
+  loop do
+    display_header()
+    input = get_player_input()
+    choice = map_to_choice(input)
+    if valid?(choice)
+      choice = choice[0]
+      break
+    else
+      puts "invalid choice"
+      sleep(1)
+    end
+  end
+  choice
+end
+
+def map_to_choice(input)
+  choice = VALID_CHOICES.select do |element|
+    element.start_with?(input)
+  end
+end
+
+def valid?(choice)
+  choice.length == 1
+end
+
 def determine_winner(player, computer, combinations)
   combinations[player][computer]
 end
@@ -35,7 +60,7 @@ def grand_winner?(score)
 end
 
 def declare_grand_winner(winner)
-  sleep(2)
+  sleep(1)
   puts "#{winner} has won 3 games! #{winner} is the grand winner!"
 end
 
@@ -99,34 +124,16 @@ combinations["lizard"] = {
 score = { 'player' => 0, 'computer' => 0 }
 
 display_header()
+
 prompt("Do you want to hear the rules? [y]es ")
 answer = gets.chomp
-# explain rules
 explain_rules() if answer.downcase().start_with?('y')
 
 loop do
-  choice = ''
-  loop do
-    # intro to program
-    display_header()
-    # player chooses
-    prompt MESSAGES['directions']
-    choice = Kernel.gets().chomp()
-    VALID_CHOICES.select
-    player_decision = VALID_CHOICES.select do |element|
-      element.start_with?(choice)
-    end
-
-    if player_decision.length == 1
-      choice = player_decision[0]
-      break
-    else
-      prompt("That's not a valid choice.")
-    end
-  end
-
+  choice = get_player_choice()
   computer_choice = VALID_CHOICES.sample
   winner = determine_winner(choice, computer_choice, combinations)
+
   display_results(choice, computer_choice, winner)
   update_score(winner, score)
   display_score(score)
