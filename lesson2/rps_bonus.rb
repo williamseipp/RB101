@@ -1,11 +1,10 @@
 require 'yaml'
-require 'pry'
 MESSAGES = YAML.load_file('rps_messages.yml')
 
 def explain_rules
   display_header()
-  MESSAGES['rules'].each_value do |line|
-    puts line
+  MESSAGES['rules'].each_value do |rule|
+    puts rule
     sleep(1)
   end
 end
@@ -42,7 +41,7 @@ def get_player_choice
 end
 
 def map_to_choice(input)
-  choice = VALID_CHOICES.select do |element|
+  VALID_CHOICES.select do |element|
     element.start_with?(input)
   end
 end
@@ -143,7 +142,7 @@ loop do
     break
   else
     prompt("Do you want to play again?")
-    answer = Kernel.gets().chomp()
+    answer = gets.chomp
     break unless answer.downcase().start_with?('y')
   end
 end
