@@ -19,7 +19,7 @@ numbers.uniq
 puts numbers
 ```
 
-## answer 1
+**my answer**
 
     1
     2
@@ -40,7 +40,7 @@ And explain what would happen in the following scenarios:
 5. put ? after something
 6. put !! before something, like !!user_name
 
-## Answer 2
+**my answer**
 
 1. This is the comparison operator "not equals" and will evaluate
     to true if the operands are not the same, and false if they are
@@ -69,7 +69,7 @@ advice = "Few things in life are as important
 as house training your pet dinosaur."
 ```
 
-## Answer 3
+**my answer**
 
 ```ruby
 advice.sub!('important','urgent')
@@ -97,7 +97,7 @@ numbers.delete(1)
 
 ```
 
-## Answer 4
+**my answer**
 
 delete_at() removes element at specified index from Array and returns it
 delete() deletes elements with specified value from Array and returns the
@@ -115,7 +115,7 @@ Programmatically determine if 42 lies between 10 and 100.
 hint: Use Ruby's range object in your solution.
 
 
-## Answer 5
+**my answer**
 
 ```ruby
 set = 10..100
@@ -132,7 +132,7 @@ famous_words = "seven years ago..."
 
 show two different ways to put the expected "Four score and" in front of it
 
-## Answer 6
+**my answer**
 
 ```ruby
 "Four score and" + famous_words
@@ -157,7 +157,7 @@ We will end up with this "nested" array:
 
 Make this into an un-nested array.
 
-## Answer 7
+**my answer**
 
 flintstones.flatten!
 
@@ -176,7 +176,7 @@ flintstones = { "Fred" => 0,
 
 Create an array containing only two elements: Barney's name and Barney's number
 
-## Answer 8
+**my answer**
 
 just_barney = flintstones.slice("Barney").to_a.flatten
 
