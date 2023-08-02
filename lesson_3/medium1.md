@@ -10,7 +10,7 @@
 
 
 
-## Question1: 
+## Question1: (wrong)
 
 Write a one-line program that creates the following ouput 10 times, with the
 subsequent line indented 1 space to the right:
@@ -38,7 +38,7 @@ name = 'will'
 name * 3        # => willwillwill
 ```
 
-## Question2: 
+## Question2: (wrong)
 
 The result of the following statement will be an error:
 
@@ -63,7 +63,7 @@ puts "the value of 40 + 2 is #{40 + 2}"
 
 dont forget about string interpolation!
 
-## Question3:
+## Question3: (wrong)
 
 Alan wrote the following method, which was intended to show all of the
 factors of the input number:
@@ -128,7 +128,7 @@ values of `number`
 
 
 
-## Question4:
+## Question4: (wrong)
 
 Alyssa was asked to write an implementation of a rolling buffer.
 Elements are added to the rolling buffer and if the buffer becomes full,
@@ -155,7 +155,7 @@ def rolling_buffer2(input_array, max_buffer_size, new_element)
 end
 ```
 
-**answer**
+**my answer**
 
 the method `rolling_buffer1` returns an array and mutates the original that
 is passed in as an argument.
@@ -198,7 +198,7 @@ result = fib(0, 1)
 puts "result is #{result}"
 ```
 
-**answer**
+**my answer**
 as I understand it, the method returns the sum of the numbers in the
 Fibonacci sequence up to a limit. The only thing wrong with the code appears
 to be the reference to a variable outside the scope of the method definition.
@@ -225,7 +225,7 @@ new_answer = mess_with_it(answer)
 p answer - 8
 ```
 
-**answer**
+**my answer**
 
 the number `34` is displayed to the screen because `42 - 8` is 34.
 the variable answer was not mutated because numbers are immutable in Ruby.
@@ -233,7 +233,7 @@ Assignments NEVER mutate!
 
 
 
-## Question7:
+## Question7: (wrong)
 
 One day Spot was playing with the Munster family's home computer and he wrote
 a small program to mess with their demographic data:
@@ -297,7 +297,7 @@ What is the result of the following call?
 puts rps(rps(rps("rock", "paper"), rps("rock", "scissors")), "rock")
 ```
 
-**answer**
+**my answer**
 
 "paper"
 
@@ -319,7 +319,7 @@ end
 bar(foo)
 ```
 
-**answer**
+**my answer**
 
 foo's default parameter is "no", but it returns a "yes"
 bar is called with the argument "yes"
