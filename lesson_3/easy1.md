@@ -30,17 +30,36 @@ numbers has not been mutated because Array#uniq does NOT mutate the caller
 
 
 ## Question2
-Describe the difference between ! and ? in Ruby. And explain what would happen in the following scenarios:
+Describe the difference between ! and ? in Ruby. 
+And explain what would happen in the following scenarios:
 
-    what is != and where should you use it?
-    put ! before something, like !user_name
-    put ! after something, like words.uniq!
-    put ? before something
-    put ? after something
-    put !! before something, like !!user_name
+1. what is != and where should you use it?
+2. put ! before something, like !user_name
+3. put ! after something, like words.uniq!
+4. put ? before something
+5. put ? after something
+6. put !! before something, like !!user_name
 
 ## Answer 2
 
+1. This is the comparison operator "not equals" and will evaluate
+    to true if the operands are not the same, and false if they are
+
+2. This is the NOT operator and will flip the state of the operand. 
+    As anything that isnt `nil` or `false` will evaluate to `true`,
+    placing a ! in front of it will cause the expression to evaluate
+    to `false`
+
+3. This is a naming convention for methods that mutate their caller.
+
+4. This is a naming convention for methods that return a boolean value
+
+5. It won't do anything by itself; the `?` begins a ternary operator
+    in Ruby which technically is `?:`
+
+6. This is two logical NOT operators. It will return the state of the
+    operand, so in the case of `user_name`, it will return `true` if
+    `user_name` isnt a `nil` or `false`
 
 ## Question3
 
@@ -51,6 +70,14 @@ as house training your pet dinosaur."
 ```
 
 ## Answer 3
+
+```ruby
+advice.sub!('important','urgent')
+```
+
+**methods have subtle differences**
+String#sub! replaces the first occurence of the matched word
+String#gsub! replaces all occurences of the matched word.
 
 
 ## Question4
@@ -71,6 +98,14 @@ numbers.delete(1)
 ```
 
 ## Answer 4
+
+delete_at() removes element at specified index from Array and returns it
+delete() deletes elements with specified value from Array and returns the
+    last element removed
+
+**note**
+
+both of these methods return the removed element
 
 
 ## Question5
@@ -99,6 +134,11 @@ show two different ways to put the expected "Four score and" in front of it
 
 ## Answer 6
 
+```ruby
+"Four score and" + famous_words
+"Four score and" << famous_words
+```
+
 
 ## Question7
 If we build an array like this:
@@ -119,6 +159,7 @@ Make this into an un-nested array.
 
 ## Answer 7
 
+flintstones.flatten!
 
 ## Question8
 
@@ -137,3 +178,15 @@ Create an array containing only two elements: Barney's name and Barney's number
 
 ## Answer 8
 
+just_barney = flintstones.slice("Barney").to_a.flatten
+
+I tried looking for an array method but I couldn't find a method that returned
+both the value AND the key. I figured then that a method probably existed of
+the Hash class that returned a key,value pair that could then be then used to 
+call a `to_a` method.
+
+Turns out the method is `slice` and `to_a` returns an array as
+needed (non-destructive). 
+
+**note**
+turns out the method exists already, called `Hash#assoc`
