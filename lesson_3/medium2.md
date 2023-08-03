@@ -1,9 +1,9 @@
 ## Question1: object_id
-## Question2:
-## Question3:
-## Question4:
-## Question5:
-## Question6:
+## Question2: there is only ONE copy of any immutable object
+## Question3: this method MUTATES!
+## Question4: this method MUTATES!
+## Question5: rewrite the mutating method
+## Question6: simplify the redunant conditional statements
 
 
 
