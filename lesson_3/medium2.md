@@ -132,7 +132,7 @@ puts "My array looks like this now: #{my_array}"
 
 
 
-## Question5
+## Question5 (wrong)
 
 Depending on a method to modify its arguments can be tricky:
 ```ruby
@@ -154,12 +154,57 @@ is going on inside the method
 
 How can we change this code to make the result easier to predict and easier for
 the next programmer to maintain? That is, the resulting method should not
-muytate either agument, but my_string should be set to 'pumpkinsrutabaga' and
+mutate either agument, but my_string should be set to 'pumpkinsrutabaga' and
 my_array should be set to ['pumpkins', 'rutabaga']
 
 **answer**
 
+```ruby
+def tricky_method(a_string_param, an_array_param)
+  a_string_param += "rutabaga"
+  an_array_param += ["rutabaga"]
+end
+```
 
+**solution**
+
+```ruby
+return a_string_param, an_array_param
+
+my_string, my_array = tricky_method(my_string, my_array)
+```
+
+**note**
+I didn't know you could return two values from a method,
+let alone assign two variables at the same time. This is why
+I read the directions for assignment and thought this was direction
+for what should be in the method definition
 
 ## Question6
+
+How could the following method be simplified without changing its return value?
+
+```ruby
+def color_valid(color)
+  if color == "blue" || color == "green"
+    true
+  else
+    false
+  end
+end
+```
+
 **answer**
+
+`color == 'blue' || color == 'green'`
+
+
+
+
+
+
+
+
+
+
+
